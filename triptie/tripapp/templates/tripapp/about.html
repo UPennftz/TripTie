@@ -1,8 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/index.js' %}"></script>
     <title>About Page</title>
 </head>
 <body>
@@ -11,10 +14,13 @@
     </header>
     <nav>
         <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'index' %}">Homef</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
         </ul>
     </nav>
     <main>
         <h2>About Page</h2>
-        <p>This is the about page of the Triptie website.</p
+        <p>This is the about page of the Triptie website.</p>
+    </main>
+</body>
+</html>
