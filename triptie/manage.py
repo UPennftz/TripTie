@@ -3,7 +3,7 @@
 import os
 import sys
 
-## 123
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'triptie.settings')

@@ -1,45 +1,36 @@
 import requests
-from flask import Flask, render_template, request
 
-# Initialize Flask application
-app = Flask(__name__)
-
-# API keys
-BING_API_KEY = 'BING_API_KEY'
-YOUTUBE_API_KEY = 'API_KEY'
-
-def search_bing_for_city(city_name):
-    """Search Bing for information about the city."""
-    url = "https://api.bing.microsoft.com/v7.0/search"
-    headers = {'Ocp-Apim-Subscription-Key': BING_API_KEY}
-    params = {'q': city_name, 'count': 10, 'offset': 0, 'mkt': 'en-US'}
-    response = requests.get(url, headers=headers, params=params)
-    return response.json()
+# Replace these with your actual API keys
+GOOGLE_API_KEY = 'AIzaSyC1OPBdF18AdTm9lTUjeXF-tZpJvdkAP50'
+YOUTUBE_API_KEY = 'AIzaSyDbSCu3VjTPVTS89Nz0K-fK7Jn4SLcUc1o'
+SEARCH_ENGINE_ID = '454edfcb47c2e4a9b'
 
 def search_youtube_for_city(city_name):
-    """Search YouTube for videos related to the city."""
+    """Search YouTube for the first video related to the city."""
     search_url = 'https://www.googleapis.com/youtube/v3/search'
     params = {
         'part': 'snippet',
         'q': city_name,
         'type': 'video',
         'key': YOUTUBE_API_KEY,
-        'maxResults': 10
+        'maxResults': 1  # Only request the first search result
     }
     response = requests.get(search_url, params=params)
     return response.json()
 
-@app.route('/explore', methods=['GET', 'POST'])
-def explore_page():
-    if request.method == 'POST':
-        city_name = request.form['city']
-        # Use Bing API to search for city information (optional)
-        bing_results = search_bing_for_city(city_name)
-        # Use YouTube API to search for city videos
-        youtube_results = search_youtube_for_city(city_name)
-        return render_template('explore_results.html', city_name=city_name, youtube_results=youtube_results['items'])
+def main():
+    city_name = input("Enter the city name to explore: ")
+    print(f"Searching for a video about {city_name}...\n")
+
+    # YouTube search for the first city video
+    youtube_results = search_youtube_for_city(city_name)
+    if youtube_results.get('items'):
+        item = youtube_results['items'][0]  # Get the first video result
+        video_title = item['snippet']['title']
+        video_url = f"https://www.youtube.com/watch?v={item['id']['videoId']}"
+        print(f"Found video: {video_title}\nURL: {video_url}\n")
     else:
-        return render_template('explore.html')
+        print("No videos found.")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    main()
