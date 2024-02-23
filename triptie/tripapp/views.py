@@ -9,9 +9,10 @@ def explore(request):
     # This view just renders the page with the search box
     return render(request, 'tripapp/explore.html')
 
-def index(request):
-    # Your logic here
-    return render(request, 'tripapp/index.html')
+def about(request):
+    # Your logic for the about page
+    return render(request, 'tripapp/about.html')  # Make sure this template exists
+
 
 def search_youtube(request):
     # This view handles searching YouTube based on the city name query parameter
