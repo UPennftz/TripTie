@@ -2,12 +2,16 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import requests
 
-# Replace with your actual YouTube API key
+# API key
 YOUTUBE_API_KEY = 'AIzaSyDbSCu3VjTPVTS89Nz0K-fK7Jn4SLcUc1o'
 
 def explore(request):
     # This view just renders the page with the search box
     return render(request, 'tripapp/explore.html')
+
+def index(request):
+    # Your logic here
+    return render(request, 'tripapp/index.html')
 
 def search_youtube(request):
     # This view handles searching YouTube based on the city name query parameter
