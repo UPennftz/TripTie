@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from tripapp import views
+from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -24,5 +24,5 @@ urlpatterns = [
     path('myposts/', views.myposts, name='myposts'),
     path('messages/', views.messages, name='messages'),
     path('explore/', views.explore, name='explore'),
+    path('search_youtube/', views.search_youtube, name='search_youtube'),  # New URL pattern for YouTube search
 ]
-
