@@ -23,6 +23,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('myposts/', views.myposts, name='myposts'),
     path('messages/', views.messages, name='messages'),
-    # path('explore/', views.explore, name='explore'),
+    path('explore/', views.explore, name='explore'),
     path('search_youtube/', views.search_youtube, name='search_youtube'),
 ]
