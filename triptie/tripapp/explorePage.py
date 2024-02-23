@@ -19,15 +19,20 @@ def search_youtube_for_city(request):
         'maxResults': max_results
     }
     response = requests.get(search_url, params=params)
-    return JsonResponse(response.json())
+    videos = response.json().get('items', [])
+    return JsonResponse({'videos': videos})  # Wrap the YouTube response in a dictionary under the 'videos' key
+
 
 # How to start Django：
 # cd /Users/ftz/Desktop/itgroup/TripTie/triptie
 # ls -l
 # When shows manage.py is correct
+
 # python3 manage.py runserver
-# no respond-solve
-# cannot show correct data
+# no respond 404 solve*
+# cannot show correct data 200
+# test url
+# http://127.0.0.1:8000/tripapp/search_youtube/?city=London
 
 
 # # API keys
