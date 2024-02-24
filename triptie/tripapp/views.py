@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+# from .explorePage import search_youtube_for_city
 import requests
 
 # API key
@@ -26,8 +27,10 @@ def myposts(request):
 def messages(request):
     return render(request, 'tripapp/messages.html')
 
-def search_youtube(request):
-    city_name = 'New York'  # Fixed test parameter
+# def search_youtube(request):
+    # city_name = 'New York'
+def search_youtube_for_city(request):
+    city_name = request.GET.get('city', 'New York')
 
     search_url = 'https://www.googleapis.com/youtube/v3/search'
     params = {
@@ -40,3 +43,6 @@ def search_youtube(request):
     response = requests.get(search_url, params=params)
     videos = response.json().get('items', [])
     return JsonResponse(videos, safe=False)
+
+def home(request):
+    return render(request, 'tripapp/home.html')

@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from tripapp import views  # Import views from your tripapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('tripapp.urls')),
+    path('tripapp/', include('tripapp.urls')),
+    path('', views.home, name='home'),  # Add this line for the homepage
 ]
+

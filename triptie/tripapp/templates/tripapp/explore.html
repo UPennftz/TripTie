@@ -21,7 +21,7 @@
         document.getElementById('search-form').addEventListener('submit', function(e) {
             e.preventDefault();
             var cityName = document.getElementById('city-name').value;
-            fetch(`/search_youtube/?city=${cityName}`)
+            fetch('/tripapp/search_youtube/?city=' + encodeURIComponent(cityName))
                 .then(response => response.json())
                 .then(data => {
                     const container = document.getElementById('youtube-videos');
