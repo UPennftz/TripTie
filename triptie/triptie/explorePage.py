@@ -26,7 +26,8 @@ def search_youtube_for_city(request):
 # ls -l
 # When shows manage.py is correct
 # python3 manage.py runserver
-# no respond
+# no respond-solve
+# cannot show correct data
 
 
 # # API keys

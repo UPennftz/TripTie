@@ -17,32 +17,31 @@
         </form>
         <div id="youtube-videos"></div>
     </main>
-    <script>
-        document.getElementById('search-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            var cityName = document.getElementById('city-name').value;
-            // 404?
-            // fetch('http://127.0.0.1:8000/tripapp/search_youtube/?city=' + encodeURIComponent(cityName))
-            fetch('/tripapp/search_youtube/?city=' + encodeURIComponent(cityName))
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('youtube-videos');
-                    container.innerHTML = ''; // Clear previous results
-                    data.items.forEach(video => {
-                        const videoFrame = document.createElement('iframe');
-                        videoFrame.width = "560";
-                        videoFrame.height = "315";
-                        videoFrame.src = `https://www.youtube.com/embed/${video.id.videoId}`;
-                        videoFrame.frameBorder = "0";
-                        videoFrame.allowFullscreen = true;
-                        container.appendChild(videoFrame);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                    console.log(error);
+<script>
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var cityName = document.getElementById('city-name').value;
+        fetch('/tripapp/search_youtube/?city=' + encodeURIComponent(cityName))
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('youtube-videos');
+                container.innerHTML = ''; // Clear previous results
+                // 直接遍历返回的数据数组
+                data.forEach(video => {
+                    const videoFrame = document.createElement('iframe');
+                    videoFrame.width = "560";
+                    videoFrame.height = "315";
+                    // 确保这里正确地访问了 videoId
+                    videoFrame.src = `https://www.youtube.com/embed/${video.id.videoId}`;
+                    videoFrame.frameBorder = "0";
+                    videoFrame.allowFullscreen = true;
+                    container.appendChild(videoFrame);
                 });
-        });
-    </script>
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+</script>
 </body>
 </html>
