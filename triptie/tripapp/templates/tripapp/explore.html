@@ -21,6 +21,8 @@
         document.getElementById('search-form').addEventListener('submit', function(e) {
             e.preventDefault();
             var cityName = document.getElementById('city-name').value;
+            // 404?
+            // fetch('http://127.0.0.1:8000/tripapp/search_youtube/?city=' + encodeURIComponent(cityName))
             fetch('/tripapp/search_youtube/?city=' + encodeURIComponent(cityName))
                 .then(response => response.json())
                 .then(data => {
@@ -36,7 +38,10 @@
                         container.appendChild(videoFrame);
                     });
                 })
-                .catch(error => console.error('Error fetching data:', error));
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    console.log(error);
+                });
         });
     </script>
 </body>
