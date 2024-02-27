@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .explorePage import search_youtube_for_city
+from django.shortcuts import render
 import requests
 
 # API key
@@ -8,6 +9,12 @@ YOUTUBE_API_KEY = 'AIzaSyDbSCu3VjTPVTS89Nz0K-fK7Jn4SLcUc1o'
 
 def explore(request):
     return render(request, 'tripapp/explore.html')
+
+def explore_view(request):
+    return render(request, 'tripapp/explore.html')
+
+def home(request):
+    return render(request, 'tripapp/home.html')
 
 def about(request):
     return render(request, 'tripapp/about.html')
@@ -44,5 +51,3 @@ def search_youtube_for_city(request):
     videos = response.json().get('items', [])
     return JsonResponse(videos, safe=False)
 
-def home(request):
-    return render(request, 'tripapp/home.html')

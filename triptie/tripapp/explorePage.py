@@ -28,11 +28,12 @@ def search_youtube_for_city(request):
 # ls -l
 # When shows manage.py is correct
 
-# python3 manage.py runserver
+# python manage.py runserver
 # no respond 404 solve*
 # cannot show correct data 200
-# test url
-# http://127.0.0.1:8000/tripapp/search_youtube/?city=London
+# open the url like this
+# http://127.0.0.1:8000/tripapp/explore/
+
 
 
 # # API keys
