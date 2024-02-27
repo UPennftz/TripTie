@@ -22,7 +22,7 @@ def search_youtube_for_city(request):
     videos = response.json().get('items', [])
     return JsonResponse({'videos': videos})  # Wrap the YouTube response in a dictionary under the 'videos' key
 
-
+# Guide
 # How to start Django：
 # cd /Users/ftz/Desktop/itgroup/TripTie/triptie
 # ls -l
