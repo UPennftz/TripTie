@@ -30,8 +30,8 @@ def search_youtube_for_city(request):
 
 # python manage.py runserver
 # no respond 404 solve*
-# cannot show correct data 200
-# open the url like this
+# cannot show correct data 200 solve*
+# open the url below to open explore page
 # http://127.0.0.1:8000/tripapp/explore/
 
 

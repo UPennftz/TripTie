@@ -48,13 +48,29 @@ header .logo {
   right: 0;
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   background: #111;
   transition: 0.5s;
   z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Add gaps to avoid videos squeezing each other */
+  padding: 20px; /* Add some space inside the container */
 }
+
+/*.showcase {*/
+/*  position: absolute;*/
+/*  right: 0;*/
+/*  width: 100%;*/
+/*  min-height: 100vh;*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*  background: #111;*/
+/*  transition: 0.5s;*/
+/*  z-index: 2;*/
+/*}*/
 
 .showcase.active {
   right: 300px;
@@ -69,6 +85,9 @@ header .logo {
   height: 480px;
   object-fit: cover;
   opacity: 0.8;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add a slight shadow effect */
+  border-radius: 10px; /* Video rounded corners */
+  transition: box-shadow 0.3s ease; /* Add smooth transition effects */
 }
 
 /*.showcase video {*/
@@ -80,6 +99,11 @@ header .logo {
 /*  object-fit: cover;*/
 /*  opacity: 0.8;*/
 /*}*/
+
+/*add this one*/
+.showcase video:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Add shadow on hover */
+}
 
 .overlay {
   position: absolute;
@@ -205,4 +229,27 @@ header .logo {
   .text h3 {
     font-size: 2em;
   }
+
+  .showcase video {
+    width: 100%; /* Video width is 100% on small screens */
+    height: auto; /* height is automatic */
+  }
 }
+
+
+
+
+/*@media (max-width: 991px) {*/
+/*  .showcase,*/
+/*  .showcase header {*/
+/*    padding: 40px;*/
+/*  }*/
+
+/*  .text h2 {*/
+/*    font-size: 3em;*/
+/*  }*/
+
+/*  .text h3 {*/
+/*    font-size: 2em;*/
+/*  }*/
+/*}*/

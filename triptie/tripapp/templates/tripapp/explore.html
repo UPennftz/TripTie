@@ -1,9 +1,14 @@
+<!--{% load static %}-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Page</title>
+<!--    I don't know why I can't add this line to modify -->
+<!--    the size of the video cover of the search results-->
+<!--    <link rel="stylesheet" href="{% static 'css/styles.css' %}">-->
 </head>
 <body>
     <header>
@@ -26,12 +31,12 @@
             .then(data => {
                 const container = document.getElementById('youtube-videos');
                 container.innerHTML = ''; // Clear previous results
-                // 直接遍历返回的数据数组
+                // Directly traverse the returned data array
                 data.forEach(video => {
                     const videoFrame = document.createElement('iframe');
                     videoFrame.width = "560";
                     videoFrame.height = "315";
-                    // 确保这里正确地访问了 videoId
+                    // Make sure the videoId is accessed correctly here
                     videoFrame.src = `https://www.youtube.com/embed/${video.id.videoId}`;
                     videoFrame.frameBorder = "0";
                     videoFrame.allowFullscreen = true;
