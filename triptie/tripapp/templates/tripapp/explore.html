@@ -1,5 +1,5 @@
-<!--load static should open this-->
-<!--{% load static %}-->
+<!--explore.html-->
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,11 +7,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Page</title>
-<!--    load static should open this-->
+<!--    load static one by one, new one is now one-->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Explore</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
         <h1>Explore Page</h1>
     </header>
     <main>
@@ -35,14 +45,30 @@
                 container.innerHTML = ''; // Clear previous results
                 // Only traverse the first three videos of the returned data array
                 data.slice(0, 3).forEach(video => {
-                    const videoFrame = document.createElement('iframe');
-                    videoFrame.width = "560";
-                    videoFrame.height = "315";
-                    // Make sure the videoId is accessed correctly here
-                    videoFrame.src = `https://www.youtube.com/embed/${video.id.videoId}`;
-                    videoFrame.frameBorder = "0";
-                    videoFrame.allowFullscreen = true;
-                    container.appendChild(videoFrame);
+                    const videoWrapper = document.createElement('div');
+                videoWrapper.classList.add('video-wrapper');
+
+                const title = document.createElement('h3');
+                title.textContent = video.snippet.title;
+                title.classList.add('video-title');
+
+                const description = document.createElement('p');
+                description.textContent = video.snippet.description;
+                description.classList.add('video-description');
+
+                const videoFrame = document.createElement('iframe');
+                videoFrame.width = "400";
+                videoFrame.height = "300";
+                videoFrame.src = `https://www.youtube.com/embed/${video.id.videoId}`;
+                videoFrame.frameBorder = "0";
+                videoFrame.allowFullscreen = true;
+                videoFrame.classList.add('video-iframe'); // Add a class for styling if needed
+
+                videoWrapper.appendChild(title);
+                videoWrapper.appendChild(description);
+                videoWrapper.appendChild(videoFrame);
+
+                container.appendChild(videoWrapper);
                 });
             })
             .catch(error => {

@@ -1,3 +1,4 @@
+/* index.css */
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 *
 {
@@ -6,9 +7,109 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+/*Stack elements vertically*/
+#youtube-videos {
+    display: flex;
+    flex-direction: row; /* Align children horizontally */
+    align-items: center; /* Center children horizontally */
+    flex-wrap: wrap; /* Wrap items to next line if not enough space */
+    gap: 20px; /* Optional: adds space between items */
+    padding: 20px;
+    width: 100%; /* Adjust width as necessary */
+}
+
+.video-wrapper {
+    flex: 1; /* Allow each video to grow */
+    min-width: 300px; /* Minimum width for each video */
+    max-width: 400px; /* Maximum width for each video */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* Space between each video block */
+}
+
+.video-title {
+    margin-top: 10px; /* Space between video and title */
+    color: #000000; /* Set title color */
+}
+
+.video-description {
+    color: #000000; /* Set description color */
+    margin-top: 5px; /* Space between title and description */
+    text-align: center; /* Center-align the text */
+    max-width: 400px; /* Max width of the description text */
+}
+
+iframe {
+  flex: none; /* Do not allow the iframe to grow or shrink */
+  width: 560px; /* Fixed width for iframe */
+  height: 315px; /* Fixed height for iframe */
+}
+
+/* Adjust iframe size if necessary */
+.video-iframe {
+    width: 100%; /* Make iframe responsive to the size of .video-wrapper */
+    height: auto; /* Maintain aspect ratio */
+}
+
+#city-name {
+  color: black;
+  width: 50%;
+  height: 40px;
+  line-height: normal;
+  padding: 5px 10px;
+  margin: 0 auto;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#search-form button {
+  height: 40px;
+  padding: 5px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer; /* Show pointer on mouseover */
+}
+
+
+/*Center the search box*/
+#search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+/* Center the main */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+
+/*Set the text color of the link to white*/
+header a {
+  color: #ffffff; /* color: white; */
+  text-decoration: none; /* no underline */
+}
+
+/*Make the navigation menu horizontal instead of vertical*/
+header ul {
+  list-style: none;
+  display: flex;
+}
+
+header ul li {
+  margin-right: 20px;
+}
+
 header
 {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -45,7 +146,7 @@ header .logo
 }
 .showcase
 {
-  position: absolute;
+  position: relative;
   right: 0;
   width: 100%;
   min-height: 100vh;
@@ -64,7 +165,7 @@ header .logo
 
 .showcase video
 {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -74,7 +175,7 @@ header .logo
 }
 .overlay
 {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -121,7 +222,7 @@ header .logo
   text-transform: uppercase;
   text-decoration: none;
   font-weight: 500;
-  margin-top: 10px;
+  margin-top: 140px;
   color: #111;
   letter-spacing: 2px;
   transition: 0.2s;
