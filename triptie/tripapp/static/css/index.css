@@ -7,54 +7,56 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-/*Stack elements vertically*/
+
 #youtube-videos {
     display: flex;
-    flex-direction: row; /* Align children horizontally */
-    align-items: center; /* Center children horizontally */
-    flex-wrap: wrap; /* Wrap items to next line if not enough space */
-    gap: 20px; /* Optional: adds space between items */
+    flex-direction: row; /* Align children in a row */
+    flex-wrap: wrap; /* Wrap items to next line if they don't fit */
+    justify-content: space-around; /* Space out the videos evenly */
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px; /* Space between videos */
     padding: 20px;
-    width: 100%; /* Adjust width as necessary */
 }
 
 .video-wrapper {
-    flex: 1; /* Allow each video to grow */
-    min-width: 300px; /* Minimum width for each video */
-    max-width: 400px; /* Maximum width for each video */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px; /* Space between each video block */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align the child elements */
+  width: calc(33.333% - 40px); /* Subtract the gap from the width */
+  box-sizing: border-box; /* Include padding and border in the element's width */
 }
 
 .video-title {
-    margin-top: 10px; /* Space between video and title */
-    color: #000000; /* Set title color */
+  font-size: 1rem; /* Adjust font size as needed */
+  color: #ffffff;
+  margin: 10px 0 0 0; /* Margin on top */
+  width: 100%;
+  text-align: center;
 }
 
 .video-description {
-    color: #000000; /* Set description color */
-    margin-top: 5px; /* Space between title and description */
-    text-align: center; /* Center-align the text */
-    max-width: 400px; /* Max width of the description text */
+  font-size: 0.9rem; /* Slightly smaller than the title */
+  color: #cccccc;
+  margin: 5px 0 20px 0; /* Margin on top and bottom */
+  text-align: center;
+  width: 100%;
 }
 
 iframe {
-  flex: none; /* Do not allow the iframe to grow or shrink */
-  width: 560px; /* Fixed width for iframe */
-  height: 315px; /* Fixed height for iframe */
+  width: 100%; /* Take the full width of the parent */
+  height: auto; /* Maintain the aspect ratio */
 }
 
 /* Adjust iframe size if necessary */
 .video-iframe {
-    width: 100%; /* Make iframe responsive to the size of .video-wrapper */
+    width: 100%; /* Take full width of the wrapper */
     height: auto; /* Maintain aspect ratio */
+    border: none; /* Remove border */
 }
 
 #city-name {
   color: black;
-  width: 50%;
+  width: 57%;
   height: 40px;
   line-height: normal;
   padding: 5px 10px;
@@ -285,20 +287,15 @@ header .logo
 {
   color: #03a9f4;
 }
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .video-wrapper {
+        max-width: calc(50% - 40px); /* Adjust max width for smaller screens */
+    }
+}
 
-@media (max-width: 991px)
-{
-  .showcase,
-  .showcase header
-  {
-    padding: 40px;
-  }
-  .text h2
-  {
-    font-size: 3em;
-  }
-  .text h3
-  {
-    font-size: 2em;
-  }
+@media (max-width: 768px) {
+    .video-wrapper {
+        max-width: 100%; /* Each video takes full width on small screens */
+    }
 }
