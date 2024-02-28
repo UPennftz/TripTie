@@ -1,3 +1,4 @@
+<!--load static should open this-->
 <!--{% load static %}-->
 
 <!DOCTYPE html>
@@ -6,9 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Page</title>
-<!--    I don't know why I can't add this line to modify -->
-<!--    the size of the video cover of the search results-->
-<!--    <link rel="stylesheet" href="{% static 'css/styles.css' %}">-->
+<!--    load static should open this-->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <header>
@@ -29,10 +29,12 @@
         fetch('/tripapp/search_youtube/?city=' + encodeURIComponent(cityName))
             .then(response => response.json())
             .then(data => {
+                // Print data to the console to examine its structure
+                // console.log(data);
                 const container = document.getElementById('youtube-videos');
                 container.innerHTML = ''; // Clear previous results
-                // Directly traverse the returned data array
-                data.forEach(video => {
+                // Only traverse the first three videos of the returned data array
+                data.slice(0, 3).forEach(video => {
                     const videoFrame = document.createElement('iframe');
                     videoFrame.width = "560";
                     videoFrame.height = "315";

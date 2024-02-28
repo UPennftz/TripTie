@@ -41,7 +41,7 @@ def search_youtube_for_city(request):
 # YOUTUBE_API_KEY = 'AIzaSyDbSCu3VjTPVTS89Nz0K-fK7Jn4SLcUc1o'
 # SEARCH_ENGINE_ID = '454edfcb47c2e4a9b'
 #
-# def search_youtube_for_city(city_name, max_results=5):
+# def search_youtube_for_city(city_name, max_results=3):
 #     """Search YouTube for videos related to the city."""
 #     search_url = 'https://www.googleapis.com/youtube/v3/search'
 #     params = {
