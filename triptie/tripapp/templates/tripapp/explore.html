@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Page</title>
-<!--    load static one by one, new one is now one-->
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
@@ -15,11 +14,11 @@
     <header>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Explore</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'explore' %}">Explore</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
             </ul>
         </nav>
         <h1>Explore Page</h1>
@@ -30,52 +29,72 @@
             <input type="text" id="city-name" placeholder="Enter a city name">
             <button type="submit">Search</button>
         </form>
-        <div id="youtube-videos"></div>
+        <div id="youtube-videos">
+            <div id="london-video" class="city-video"></div>
+            <div id="paris-video" class="city-video"></div>
+            <div id="edinburgh-video" class="city-video"></div>
+        </div>
     </main>
-<script>
-    document.getElementById('search-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        var cityName = document.getElementById('city-name').value;
-        fetch('/tripapp/search_youtube/?city=' + encodeURIComponent(cityName))
-            .then(response => response.json())
-            .then(data => {
-                // Print data to the console to examine its structure
-                // console.log(data);
-                const container = document.getElementById('youtube-videos');
-                container.innerHTML = ''; // Clear previous results
-                // Only traverse the first three videos of the returned data array
-                data.slice(0, 3).forEach(video => {
-                const videoWrapper = document.createElement('div');
-                videoWrapper.classList.add('video-wrapper');
+    <script>
+        function loadCityVideo(cityName, containerId) {
+            fetch('/tripapp/search_youtube/?city=' + encodeURIComponent(cityName + ' travel'))
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById(containerId);
+                    container.innerHTML = ''; // Clear previous results
 
-                const videoFrame = document.createElement('iframe');
-                videoFrame.width = "100%"; // Change to 100% for responsive width
-                videoFrame.height = "300"; // You can adjust the height as necessary
-                videoFrame.src = `https://www.youtube.com/embed/${video.id.videoId}`;
-                videoFrame.frameBorder = "0";
-                videoFrame.allowFullscreen = true;
-                videoFrame.classList.add('video-iframe'); // Add a class for styling if needed
+                    if (data && data.length > 0) {
+                        const video = data[0]; // Get the first video
+                        const videoFrame = document.createElement('iframe');
+                        videoFrame.width = "100%";
+                        videoFrame.height = "300";
+                        videoFrame.src = `https://www.youtube.com/embed/${video.id.videoId}`;
+                        videoFrame.frameBorder = "0";
+                        videoFrame.allowFullscreen = true;
+                        videoFrame.classList.add('video-iframe');
 
-                const title = document.createElement('h3');
-                title.textContent = video.snippet.title;
-                title.classList.add('video-title');
+                        const videoTitle = document.createElement('h3');
+                        videoTitle.textContent = video.snippet.title;
+                        videoTitle.classList.add('video-title');
 
-                const description = document.createElement('p');
-                description.textContent = video.snippet.description;
-                description.classList.add('video-description');
+                        const videoDescription = document.createElement('p');
+                        videoDescription.textContent = video.snippet.description;
+                        videoDescription.classList.add('video-description');
 
-                // Append the iframe first, then the title and description
-                videoWrapper.appendChild(videoFrame);
-                videoWrapper.appendChild(title);
-                videoWrapper.appendChild(description);
+                        const videoInfo = document.createElement('div');
+                        videoInfo.classList.add('video-info');
 
-                container.appendChild(videoWrapper);
+                        videoInfo.appendChild(videoTitle);
+                        videoInfo.appendChild(videoDescription);
+
+                        const videoContainer = document.createElement('div');
+                        videoContainer.classList.add('video-container');
+
+                        videoContainer.appendChild(videoFrame);
+                        videoContainer.appendChild(videoInfo);
+
+                        container.appendChild(videoContainer);
+                    } else {
+                        // Handle case where no videos are returned
+                        container.textContent = 'No videos found for ' + cityName;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data for ' + cityName + ':', error);
                 });
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    });
-</script>
+        }
+
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var cityName = document.getElementById('city-name').value + ' travel';
+            loadCityVideo(cityName, 'youtube-videos');
+        });
+
+        window.onload = function() {
+            loadCityVideo('London', 'london-video');
+            loadCityVideo('Paris', 'paris-video');
+            loadCityVideo('Edinburgh', 'edinburgh-video');
+        };
+    </script>
 </body>
 </html>

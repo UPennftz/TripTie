@@ -9,14 +9,42 @@
 }
 
 #youtube-videos {
-    display: flex;
-    flex-direction: row; /* Align children in a row */
-    flex-wrap: wrap; /* Wrap items to next line if they don't fit */
-    justify-content: space-around; /* Space out the videos evenly */
-    align-items: flex-start; /* Align items at the top */
-    gap: 20px; /* Space between videos */
-    padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start; /* align-items changed to flex-start */
+  flex-wrap: wrap; /* allows items to wrap to the next line */
 }
+
+.video-container {
+  flex-basis: 30%;
+  margin: 10px;
+  display: flex;
+  flex-direction: column; /* stacks children (iframe and info div) vertically */
+  align-items: center; /* centers the children horizontally */
+}
+
+.video-iframe {
+  margin-bottom: 5px; /* adds a little space below the video */
+}
+
+.video-info {
+  text-align: center; /* centers the text of title and description */
+}
+
+.video-title {
+  margin: 5px 0; /* adds some space above and below the title */
+}
+
+.video-description {
+  font-size: 0.9em; /* optionally reduce the font size of the description */
+}
+
+/* This styles each individual video container */
+.city-video {
+  flex-basis: 30%; /* This gives each video container a base width */
+  margin: 10px; /* This adds some space around each video container */
+}
+
 
 .video-wrapper {
   display: flex;
@@ -26,32 +54,9 @@
   box-sizing: border-box; /* Include padding and border in the element's width */
 }
 
-.video-title {
-  font-size: 1rem; /* Adjust font size as needed */
-  color: #848484;
-  margin: 10px 0 0 0; /* Margin on top */
-  width: 100%;
-  text-align: center;
-}
-
-.video-description {
-  font-size: 0.9rem; /* Slightly smaller than the title */
-  color: #808080;
-  margin: 5px 0 20px 0; /* Margin on top and bottom */
-  text-align: center;
-  width: 100%;
-}
-
 iframe {
   width: 100%; /* Take the full width of the parent */
   height: auto; /* Maintain the aspect ratio */
-}
-
-/* Adjust iframe size if necessary */
-.video-iframe {
-    width: 100%; /* Take full width of the wrapper */
-    height: auto; /* Maintain aspect ratio */
-    border: none; /* Remove border */
 }
 
 #city-name {
