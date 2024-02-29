@@ -7,9 +7,9 @@ YOUTUBE_API_KEY = 'AIzaSyDbSCu3VjTPVTS89Nz0K-fK7Jn4SLcUc1o'
 
 @require_http_methods(["GET"])
 def search_youtube_for_city(request):
-    """Search YouTube for videos related to the city."""
-    city_name = request.GET.get('city', '')
-    max_results = 3
+    # 'city_name'--> 'city_name travel'
+    city_name = request.GET.get('city' + ' travel', '')
+    max_results = 1
     search_url = 'https://www.googleapis.com/youtube/v3/search'
     params = {
         'part': 'snippet',

@@ -1,9 +1,17 @@
 /* styles.css */
 
+/*background set to black*/
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background: #eaeaea;
 }
+.container {
+  background: #a10000;
+}
+
+/*body {*/
+/*  font-family: Arial, sans-serif;*/
+/*  background-color: # #000000;*/
+/*}*/
 
 header {
   position: relative;

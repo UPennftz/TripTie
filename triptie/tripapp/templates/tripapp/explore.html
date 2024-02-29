@@ -45,8 +45,16 @@
                 container.innerHTML = ''; // Clear previous results
                 // Only traverse the first three videos of the returned data array
                 data.slice(0, 3).forEach(video => {
-                    const videoWrapper = document.createElement('div');
+                const videoWrapper = document.createElement('div');
                 videoWrapper.classList.add('video-wrapper');
+
+                const videoFrame = document.createElement('iframe');
+                videoFrame.width = "100%"; // Change to 100% for responsive width
+                videoFrame.height = "300"; // You can adjust the height as necessary
+                videoFrame.src = `https://www.youtube.com/embed/${video.id.videoId}`;
+                videoFrame.frameBorder = "0";
+                videoFrame.allowFullscreen = true;
+                videoFrame.classList.add('video-iframe'); // Add a class for styling if needed
 
                 const title = document.createElement('h3');
                 title.textContent = video.snippet.title;
@@ -56,17 +64,10 @@
                 description.textContent = video.snippet.description;
                 description.classList.add('video-description');
 
-                const videoFrame = document.createElement('iframe');
-                videoFrame.width = "400";
-                videoFrame.height = "300";
-                videoFrame.src = `https://www.youtube.com/embed/${video.id.videoId}`;
-                videoFrame.frameBorder = "0";
-                videoFrame.allowFullscreen = true;
-                videoFrame.classList.add('video-iframe'); // Add a class for styling if needed
-
+                // Append the iframe first, then the title and description
+                videoWrapper.appendChild(videoFrame);
                 videoWrapper.appendChild(title);
                 videoWrapper.appendChild(description);
-                videoWrapper.appendChild(videoFrame);
 
                 container.appendChild(videoWrapper);
                 });

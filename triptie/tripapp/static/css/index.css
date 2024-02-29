@@ -28,7 +28,7 @@
 
 .video-title {
   font-size: 1rem; /* Adjust font size as needed */
-  color: #ffffff;
+  color: #848484;
   margin: 10px 0 0 0; /* Margin on top */
   width: 100%;
   text-align: center;
@@ -36,7 +36,7 @@
 
 .video-description {
   font-size: 0.9rem; /* Slightly smaller than the title */
-  color: #cccccc;
+  color: #808080;
   margin: 5px 0 20px 0; /* Margin on top and bottom */
   text-align: center;
   width: 100%;
