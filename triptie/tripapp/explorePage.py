@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import requests
 
-# API keys
 YOUTUBE_API_KEY = 'AIzaSyDbSCu3VjTPVTS89Nz0K-fK7Jn4SLcUc1o'
 
 @require_http_methods(["GET"])
@@ -18,6 +17,8 @@ def search_youtube_for_city(request):
         'maxResults': max_results
     }
     response = requests.get(search_url, params=params)
+    # debugging statements
+    print(response.text)
     videos = response.json().get('items', [])
     return JsonResponse({'videos': videos})  # Wrap the YouTube response in a dictionary under the 'videos' key
 

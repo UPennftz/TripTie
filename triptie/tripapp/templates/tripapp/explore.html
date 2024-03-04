@@ -37,14 +37,14 @@
     </main>
     <script>
         function loadCityVideo(cityName, containerId) {
-            fetch('/tripapp/search_youtube/?city=' + encodeURIComponent(cityName + ' travel'))
+            fetch('/tripapp/search_youtube/?city=' + encodeURIComponent(cityName))
                 .then(response => response.json())
                 .then(data => {
                     const container = document.getElementById(containerId);
-                    container.innerHTML = ''; // Clear previous results
+                    container.innerHTML = ''; // Clear previous content
 
                     if (data && data.length > 0) {
-                        const video = data[0]; // Get the first video
+                        const video = data[0]; // Only take the first video
                         const videoFrame = document.createElement('iframe');
                         videoFrame.width = "100%";
                         videoFrame.height = "300";
@@ -75,7 +75,6 @@
 
                         container.appendChild(videoContainer);
                     } else {
-                        // Handle case where no videos are returned
                         container.textContent = 'No videos found for ' + cityName;
                     }
                 })
@@ -87,13 +86,13 @@
         document.getElementById('search-form').addEventListener('submit', function(e) {
             e.preventDefault();
             var cityName = document.getElementById('city-name').value + ' travel';
-            loadCityVideo(cityName, 'youtube-videos');
+            loadCityVideo(cityName, 'youtube-videos'); // Add ' travel' only once
         });
 
         window.onload = function() {
-            loadCityVideo('London', 'london-video');
-            loadCityVideo('Paris', 'paris-video');
-            loadCityVideo('Edinburgh', 'edinburgh-video');
+            loadCityVideo('London travel', 'london-video');
+            loadCityVideo('Paris travel', 'paris-video');
+            loadCityVideo('Edinburgh travel', 'edinburgh-video');
         };
     </script>
 </body>
