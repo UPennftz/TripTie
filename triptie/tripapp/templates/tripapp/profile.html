@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        #logo {
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+        button:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            margin-left: 20px;
+            color: #fff;
+        }
+        /* Add further styling for your section */
+    </style>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div style="display: flex; align-items: center;">
+            <div id="logo">LOGO</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'explore' %}">Explore</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'weather' %}">Weather</a></li>
+                </ul>
+            </nav>
+        </div>
+        <h1>Profile Page</h1>
+        <button onclick="logout()">Log Out</button>
+    </header>
+    <section>
+        <div id="avatar">avatar</div>
+        <div id="user-info">
+            <p>Name:</p>
+            <p>Age:</p>
+            <p>Gender:</p>
+            <p>Nationality:</p>
+            <button onclick="editProfile()">Edit</button>
+        </div>
+        <div id="user-actions">
+            <button onclick="viewCollection()">My Collection</button>
+            <button onclick="viewPosts()">My Post</button>
+        </div>
+    </section>
+    <script>
+        function logout() {
+            // Implement the logout functionality
+        }
+        function editProfile() {
+            // Implement the edit profile functionality
+        }
+        function viewCollection() {
+            // Implement the view collection functionality
+        }
+        function viewPosts() {
+            // Implement the view posts functionality
+        }
+    </script>
+    <script src="{% static 'js/profilePage.js' %}"></script>
+</body>
+</html>
