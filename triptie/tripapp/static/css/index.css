@@ -167,7 +167,7 @@ header .logo
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: top;
+  align-items: center;
 }
 .menu ul
 {
