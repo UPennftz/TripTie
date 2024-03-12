@@ -24,5 +24,6 @@ urlpatterns = [
     path('myposts/', views.myposts, name='myposts'),
     path('messages/', views.messages, name='messages'),
     path('explore/', views.explore, name='explore'),
+    path('weather/', views.weather, name='weather'),
 ]
 

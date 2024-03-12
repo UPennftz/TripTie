@@ -9,6 +9,9 @@ def about(request):
 def login(request):
     return render(request, 'tripapp/login.html')
 
+def weather(request):
+    return render(request, 'tripapp/weather.html')
+
 def profile(request):
     return render(request, 'tripapp/profile.html')
 
