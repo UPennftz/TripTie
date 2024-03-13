@@ -3,3 +3,4 @@ djangorestframework>=3.12
 gunicorn==21.2.0
 whitenoise==6.6.0
 Pillow>=9.0.0
+django-registration-redux==2.1.3

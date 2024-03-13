@@ -16,14 +16,15 @@ Including another URLconf
 from django.urls import path
 from tripapp import views
 
+app_name = 'tripapp'
+
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('about/', views.about, name='about'),
     path('login/', views.login, name='login'),
     path('profile/', views.profile, name='profile'),
     path('myposts/', views.myposts, name='myposts'),
     path('messages/', views.messages, name='messages'),
     path('explore/', views.explore, name='explore'),
-    path('weather/', views.weather, name='weather'),
 ]
 

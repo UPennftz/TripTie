@@ -1,4 +1,5 @@
 {% load static %}
+{% load tripapp_template_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +23,7 @@
       <p>Welcome to TripTie, your ultimate destination for unforgettable travel experiences! Whether you're dreaming of relaxing on pristine beaches, exploring vibrant cities, or embarking on thrilling adventures, you can find your right spot.
         Discover a world of possibilities and find your travel buddy.
         Browse our travel guides and articles for insider tips, hidden gems, and must-see attractions in each destination.</p>
-         <a href="{% url 'explore' %}">Explore</a>
+         <a href="{% url 'tripapp:explore' %}">Explore</a>
     </div>
     <ul class="social">
       <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png" onclick="shareOnFacebook()"></a></li>
@@ -32,18 +33,18 @@
   </section>
   <div class="menu">
     <ul>
-      <li><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'profile' %}">Profile</a></li>
-      <li><a href="{% url 'login' %}">Login | Register</a></li>
-      <li><a href="{% url 'about' %}">About</a></li>
+      <li><a href="{% url 'tripapp:index' %}">Home</a></li>
+      <li><a href="{% url 'tripapp:profile' %}">Profile</a></li>
+      <li><a href="{% url 'tripapp:login' %}">Login | Register</a></li>
+      <li><a href="{% url 'tripapp:about' %}">About</a></li>
     </ul>
   </div>
-<script src="{% static 'js/index.js' %}"></script> 
+<script src="{% static 'js/index.js' %}"></script>
 <script>
   function tweetShare() {
     window.open('https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20website%21%20https%3A%2F%2Fexample.com%2F');
   }
-    
+
   function shareOnFacebook() {
       var url = encodeURIComponent(window.location.href);
       window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
