@@ -16,7 +16,7 @@ def search_youtube_for_city(request):
         'key': YOUTUBE_API_KEY,
         'maxResults': max_results
     }
-    response = requests.get(search_url, params=params)
+    response = requests.get(search_url, params)
     # debugging statements
     print(response.text)
     videos = response.json().get('items', [])
