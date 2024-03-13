@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,153 +40,189 @@
     </header>
     <div id="city-search">
         <input type="text" id="cityName" placeholder="Enter city name" />
-        <button onclick="fetchWeatherForInputCity()">Search</button>
+        <button id="searchButton">Search</button>
     </div>
     <div id="weather-container">
         <div class="weather-box">
             <h2>Current Weather:</h2>
-            <p>Weather:</p>
+            <p>Weather Status:</p>
             <p>Temperature:</p>
             <p>Time:</p>
         </div>
         <div class="weather-box">
-            <h2>Other day temperature</h2>
+            <h2>Recent day temperature</h2>
         </div>
     </div>
-<script>
-    // Function to fetch weather data for the user-entered city
-    async function fetchWeather(lat, lon) {
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`;
-
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Failed to retrieve weather data');
-            }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Error fetching weather data:', error);
-            throw error;
-        }
-    }
-
-    async function getCoordinatesForCity(city) {
-    const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&format=json&limit=1`;
-
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('Failed to retrieve location data');
-        }
-        const data = await response.json();
-        if (data.length === 0) {
-            throw new Error('City not found');
-        }
-        const latitude = data[0].lat;
-        const longitude = data[0].lon;
-        return { latitude, longitude };
-    } catch (error) {
-        console.error('Error fetching location data:', error);
-        throw error;
-    }
-    }
+    <script>
+        // initiating the process of fetching and displaying weather data on page load
+        fetchWeatherInfo();
 
 
-    // Function to clear other days' weather display
-    function clearOtherDaysWeather() {
-        const otherDaysBox = document.querySelector('.weather-box:last-child');
-        otherDaysBox.innerHTML = '<h2>Other day temperature</h2>';
-    }
+        // fetch weather data from API for a given latitude and longitude
+        async function fetchWeather(lat, lon) {
 
-    // Function to fetch location from ipinfo.io and weather data from Open-Meteo
-    async function fetchWeatherInfo() {
-        try {
-            // Get location data from ipinfo.io
-            const ipinfoResponse = await fetch('https://ipinfo.io?token=6732adc15fee27');
-            const ipinfoData = await ipinfoResponse.json();
-            // Update the location header with the retrieved location
-            updateLocationDisplay(ipinfoData.city, ipinfoData.region, ipinfoData.country);
-            const [lat, lon] = ipinfoData.loc.split(',');
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`;
 
-            // Fetch both current weather and the forecast
-            const weatherData = await fetchWeather(lat, lon);
-
-            // Update the UI with the weather data
-            updateWeatherUI(weatherData);
-        } catch (error) {
-            console.error("Failed to fetch weather data:", error);
-            alert('Failed to fetch weather data. Please try again later.');
-        }
-    }
-
-    // Function to fetch weather data for a given latitude and longitude
-    async function fetchWeather(lat, lon) {
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto`;
-
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Failed to retrieve weather data');
-            }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Error fetching weather data:', error);
-            throw error;
-        }
-    }
-
-    // Function to update the location display
-    function updateLocationDisplay(city, region, country) {
-        const header = document.querySelector('header h1');
-        header.textContent = `Location: ${city}, ${region}, ${country}`;
-    }
-
-    // Function to update the UI with fetched weather data
-    function updateWeatherUI(data) {
-        const weatherContainer = document.getElementById('weather-container');
-        const currentWeatherBox = weatherContainer.children[0];
-        const otherDaysBox = weatherContainer.children[1];
-
-        // Update current weather
-        // Convert weather code to description
-        const weatherDescriptions = {
-            0: 'Clear sky',
-            1: 'Mainly clear',
-            2: 'Partly cloudy',
-            3: 'Overcast',
-        };
-        const weatherDescription = weatherDescriptions[data.current_weather.weathercode] || 'Not available';
-
-        // Format the time to a more readable format
-        const weatherTime = new Date(data.current_weather.time);
-        const timeString = weatherTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-
-        currentWeatherBox.innerHTML = `
-            <h2>Current Weather:</h2>
-            <p>Weather: ${weatherDescription}</p>
-            <p>Temperature: ${data.current_weather.temperature}°C</p>
-            <p>Time: ${timeString}</p>
-        `;
-
-        // Update other days' weather info
-        let otherDaysHTML = '<h2>Other day temperature</h2>';
-        if (data.daily && data.daily.time) {
-            for (let i = 0; i < data.daily.time.length; i++) {
-                const date = new Date(data.daily.time[i]);
-                const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
-                const maxTemp = data.daily.temperature_2m_max[i];
-                const minTemp = data.daily.temperature_2m_min[i];
-
-                otherDaysHTML += `
-                    <p>${dayName}: Max: ${maxTemp}°C, Min: ${minTemp}°C</p>
-                `;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Failed to retrieve weather data');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+                throw error;
             }
         }
-        otherDaysBox.innerHTML = otherDaysHTML;
-    }
-    fetchWeatherInfo();
-</script>
+
+
+
+        // retrieves the geographical coordinates for a given city name
+        async function getCoordinatesForCity(city) {
+            const url = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&format=json&limit=1`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Failed to retrieve location data');
+                }
+                const data = await response.json();
+                if (data.length === 0) {
+                    throw new Error('City not found');
+                }
+                // Extracting additional info from the response
+                const latitude = data[0].lat;
+                const longitude = data[0].lon;
+                const region = data[0].state || ''; // 'state' might be a good proxy for region
+                const country = data[0].country || '';
+                return { latitude, longitude, city: city, region, country }; // Including city as it's not directly returned
+            } catch (error) {
+                console.error('Error fetching location data:', error);
+                throw error;
+            }
+}
+
+
+
+
+        // clears any previous weather information displayed for other days.
+        function clearOtherDaysWeather() {
+            const otherDaysBox = document.querySelector('.weather-box:last-child');
+            otherDaysBox.innerHTML = '<h2>Other day temperature</h2>';
+        }
+
+
+
+        // fetch location, updates the display with the current location, fetch the weather data
+        async function fetchWeatherInfo() {
+            try {
+                // Get location data from ipinfo.io
+                const ipinfoResponse = await fetch('https://ipinfo.io?token=6732adc15fee27');
+                const ipinfoData = await ipinfoResponse.json();
+                // Update the location header with the retrieved location
+                updateLocationDisplay(ipinfoData.city, ipinfoData.region, ipinfoData.country);
+                const [lat, lon] = ipinfoData.loc.split(',');
+                // Fetch both current weather and the forecast
+                const weatherData = await fetchWeather(lat, lon);
+                // Update the UI with the weather data
+                updateWeatherUI(weatherData);
+            } catch (error) {
+                console.error("Failed to fetch weather data:", error);
+                alert('Failed to fetch weather data. Please try again later.');
+            }
+        }
+
+
+
+        // updates the page's header (<h1>) with the provided city, region, and country information
+        function updateLocationDisplay(city, region, country) {
+            const header = document.querySelector('header h1');
+            let locationDisplay = city;
+            if (region) locationDisplay += `, ${region}`;
+            if (country) locationDisplay += `, ${country}`;
+            header.textContent = `Location: ${locationDisplay}`;
+        }
+
+
+
+
+        // takes the weather data and updates the web page's content
+        function updateWeatherUI(data) {
+            const weatherContainer = document.getElementById('weather-container');
+            const currentWeatherBox = weatherContainer.children[0];
+            const otherDaysBox = weatherContainer.children[1];
+
+            // Update current weather
+            // Convert weather code to description
+            const weatherDescriptions = {
+                0: 'Clear sky',
+                1: 'Mainly clear',
+                2: 'Partly cloudy',
+                3: 'Overcast',
+            };
+            const weatherDescription = weatherDescriptions[data.current_weather.weathercode] || 'Not available';
+
+            // Format the time to a more readable format
+            const weatherTime = new Date(data.current_weather.time);
+            const timeString = weatherTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+            currentWeatherBox.innerHTML = `
+                <h2>Current Weather:</h2>
+                <p>Weather: ${weatherDescription}</p>
+                <p>Temperature: ${data.current_weather.temperature}°C</p>
+                <p>Time: ${timeString}</p>
+            `;
+
+            // Update other days' weather info
+            let otherDaysHTML = '<h2>Other day temperature</h2>';
+            if (data.daily && data.daily.time) {
+                for (let i = 0; i < data.daily.time.length; i++) {
+                    const date = new Date(data.daily.time[i]);
+                    const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+                    const maxTemp = data.daily.temperature_2m_max[i];
+                    const minTemp = data.daily.temperature_2m_min[i];
+
+                    otherDaysHTML += `
+                        <p>${dayName}: Max: ${maxTemp}°C, Min: ${minTemp}°C</p>
+                    `;
+                }
+            }
+            otherDaysBox.innerHTML = otherDaysHTML;
+        }
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchButton = document.getElementById('searchButton');
+            searchButton.addEventListener('click', async () => {
+                const cityInput = document.getElementById('cityName').value.trim();
+                if (cityInput) {
+                    try {
+                        const locationInfo = await getCoordinatesForCity(cityInput);
+                        if (locationInfo) {
+                            // Fetch the weather using the obtained coordinates
+                            const weatherData = await fetchWeather(locationInfo.latitude, locationInfo.longitude);
+                            // Update the location display with the fetched location data
+                            updateLocationDisplay(locationInfo.city, locationInfo.region, locationInfo.country);
+                            // Update the UI with the fetched weather data
+                            updateWeatherUI(weatherData);
+                        } else {
+                            alert('Coordinates not found for the city.');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Failed to fetch weather information. Please try again...');
+                    }
+                } else {
+                    alert('Please enter a city name.');
+                }
+            });
+        });
+
+
+
+
+    </script>
 </body>
 </html>
