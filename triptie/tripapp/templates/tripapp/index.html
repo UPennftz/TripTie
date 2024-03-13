@@ -4,42 +4,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-<script src="{% static 'js/index.js' %}"></script>
+ <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
   <title>Document</title>
 </head>
 <body>
-  <!-- Video Source -->
-  <!-- https://www.pexels.com/video/aerial-view-of-beautiful-resort-2169880/ -->
   <section class="showcase">
     <header>
-      <h2 class="logo">Travel</h2>
+      <h2 class="logo">TripTie</h2>
       <div class="toggle"></div>
     </header>
-    <video src="https://vod-progressive.akamaized.net/exp=1708612733~acl=%2Fvimeo-transcode-storage-prod-us-central1-h264-2160p%2F01%2F1082%2F13%2F330412624%2F1297186305.mp4~hmac=3eb1a4bd72f03e7ed0dc76ad4fb729b56d94ac91fef45ea75abc2e2913643ebf/vimeo-transcode-storage-prod-us-central1-h264-2160p/01/1082/13/330412624/1297186305.mp4?download=1&filename=pexels_videos_2169880+%282160p%29.mp4" muted loop autoplay></video>
+    <video src="{% static 'media/video.mp4' %}" muted loop autoplay></video>
     <div class="overlay"></div>
     <div class="text">
       <h2>Never Stop </h2>
       <h3>Exploring The World</h3>
-      <p>Dorogushaaaaa....Cheeeeeeer. netu U vas morshin!!!! Vi Prekrasnaaaa i horosho sosete.</p>
-      <a href="{% url 'explore' %}">Explore</a>
+
+      <p>Welcome to TripTie, your ultimate destination for unforgettable travel experiences! Whether you're dreaming of relaxing on pristine beaches, exploring vibrant cities, or embarking on thrilling adventures, you can find your right spot.
+        Discover a world of possibilities and find your travel buddy.
+        Browse our travel guides and articles for insider tips, hidden gems, and must-see attractions in each destination.</p>
+         <a href="{% url 'explore' %}">Explore</a>
     </div>
     <ul class="social">
-      <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li>
-      <li><a href="#"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/x7P24fL/facebook.png" onclick="shareOnFacebook()"></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png" onclick="tweetShare()"></a></li>
       <li><a href="#"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
     </ul>
   </section>
   <div class="menu">
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">News</a></li>
-      <li><a href="#">Destination</a></li>
-      <li><a href="#">Blog</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'profile' %}">Profile</a></li>
+      <li><a href="{% url 'login' %}">Login | Register</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
     </ul>
   </div>
-  <script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script> 
+<script>
+  function tweetShare() {
+    window.open('https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20website%21%20https%3A%2F%2Fexample.com%2F');
+  }
+    
+  function shareOnFacebook() {
+      var url = encodeURIComponent(window.location.href);
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank');
+  }
+</script>
 </body>
 </html>
