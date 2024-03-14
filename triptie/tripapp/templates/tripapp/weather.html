@@ -6,38 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Info Display</title>
-    <style>
-        #weather-container {
-            display: flex;
-            justify-content: space-around;
-            padding: 20px;
-        }
-        .weather-box {
-            border: 1px solid black;
-            padding: 10px;
-            width: 300px;
-        }
-        /* Additional styles for the input field and button for city search */
-        #city-search {
-            margin: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        #city-search input {
-            margin-right: 10px;
-            padding: 5px;
-        }
-        #city-search button {
-            cursor: pointer;
-            padding: 5px 10px;
-        }
-    </style>
+
 </head>
 <body>
     <header>
         <h1>Location Display</h1>
         <button onclick="window.location.href='{% url 'index' %}'">Home</button>
     </header>
+    <video id="backgroundVideo" autoplay loop muted style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; z-index: -1;"></video>
+
     <div id="city-search">
         <input type="text" id="cityName" placeholder="Enter city name" />
         <button id="searchButton">Search</button>
@@ -152,6 +129,7 @@
             const weatherContainer = document.getElementById('weather-container');
             const currentWeatherBox = weatherContainer.children[0];
             const otherDaysBox = weatherContainer.children[1];
+            updateBackgroundVideo(data.current_weather.temperature);
 
             // Update current weather
             // Convert weather code to description
@@ -173,6 +151,8 @@
                 <p>Temperature: ${data.current_weather.temperature}°C</p>
                 <p>Time: ${timeString}</p>
             `;
+  
+            
 
             // Update other days' weather info
             let otherDaysHTML = '<h2>Other day temperature</h2>';
@@ -220,7 +200,29 @@
             });
         });
 
+    let temperature = data.current_weather.temperature;
 
+
+    function updateBackgroundVideo(temperature) {
+    const videoElement = document.getElementById('backgroundVideo');
+    let videoSource;
+
+    if (temperature <= 0) {
+        videoSource = "{% static 'media/cold.mp4' %}";
+    } else if (temperature <= 15) {
+        videoSource = "{% static 'media/mild.mp4' %}";
+    } 
+    else if (temperature <= 20) {
+        videoSource = "{% static 'media/warm.mp4' %}";
+    } else if (temperature <= 27) {
+        videoSource = "{% static 'media/hot.mp4' %}";
+    } else {
+        videoSource = "{% static 'media/default.mp4' %}";
+    }
+
+    videoElement.src = videoSource;
+    videoElement.play().catch(e => console.error("Failed to play video", e));
+}
 
 
     </script>
