@@ -1,27 +1,17 @@
-"""triptie URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from tripapp import views  # Ensure you have home and explore_view defined here
 
-from tripapp import views
+urlpatterns = [
+     path('about/', views.about, name='about'),
+    path('admin/', admin.site.urls),
+    path('', views.IndexView.as_view(), name='index'),  # Homepage handled by IndexView
+    path('tripapp/', include('tripapp.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('home/', views.home, name='home'),  # Path for the homepage view if different from IndexView
+    path('weather/', views.weather, name='weather'),  # Path for the homepage view if different from IndexView
 
-urlpatterns = [path('admin/', admin.site.urls),
-               path('', views.IndexView.as_view(), name='index'),
-               path('tripapp/', include('tripapp.urls')),
-               path('accounts/', include('registration.backends.simple.urls'))
-               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('explore/', views.explore_view, name='explore'),  # Path for the explore view
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
