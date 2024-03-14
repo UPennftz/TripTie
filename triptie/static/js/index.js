@@ -6,6 +6,17 @@ menuToggle.addEventListener('click', () => {
   showcase.classList.toggle('active');
 });
 
+document.getElementById("Login | Register").addEventListener("click", function() {
+  fetch('/popup/')
+      .then(response => response.text())
+      .then(html => {
+          const popupWindow = window.open('', '_blank', 'width=600,height=400');
+          popupWindow.document.write(html);
+          popupWindow.document.close();
+      })
+      .catch(error => console.error('Error loading the popup content:', error));
+});
+
 function tweetShare() {
   window.open('https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20website%21%20https%3A%2F%2Fexample.com%2F');
 }
