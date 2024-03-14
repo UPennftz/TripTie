@@ -32,8 +32,8 @@ class TripPlan(models.Model):
     destination_city = models.CharField(max_length=CITY_MAX_VALUE)
     start_date = models.DateField()
     end_date = models.DateField()
-    is_private = models.BooleanField(default=False)
-    image = models.ImageField(upload_to='trip_images', blank=True)
+    is_private = models.BooleanField(default=False,blank=True)
+    image = models.ImageField(upload_to='trip_images')
 
     def clean(self):
         # Ensure end_date is after start_date

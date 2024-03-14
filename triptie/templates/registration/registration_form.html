@@ -15,7 +15,7 @@
     <div class="row">
         <div class="form-group" >
             <form role="form"  method="post" action=".">
-{#                {% csrf_token %}#}
+<!--                {% csrf_token %}-->
                 <div class="form-group">
                     <p class="required">
                         <label class="required" for="id_username">Username:</label>
@@ -43,6 +43,8 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
+            {{ form.errors }}
         </div>
     </div>
 </div>

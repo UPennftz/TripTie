@@ -18,5 +18,6 @@ urlpatterns = [
     path('add_like/', views.AddLike.as_view(), name='add_like'),
     path('explore/', views.explore, name='explore'),
     path('search_youtube/', views.search_youtube_for_city, name='search_youtube'),
-    path('weather/', views.weather, name='weather'),
+    path('weather/', views.WeatherView.as_view(), name='weather'),
+    path('search_youtube/', views.search_youtube_for_city, name='search_youtube'),
 ]
