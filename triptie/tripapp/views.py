@@ -4,18 +4,13 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
-<<<<<<< HEAD
 from django.http import JsonResponse
 from .explorePage import search_youtube_for_city
 from django.shortcuts import render
 import requests
-=======
-
 from tripapp.form import UserProfileForm, TripPlanForm
 from tripapp.models import UserProfile, TripPlan, LikePost
 
-
->>>>>>> 1e619de75e1eee97f846dbce3da471f55b18eb89
 class IndexView(View):
     def get(self, request):
         return render(request, 'tripapp/index.html')
