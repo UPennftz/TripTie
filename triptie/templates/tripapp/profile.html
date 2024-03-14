@@ -24,6 +24,8 @@
                 </p>
                 {% if selected_user == user %}
                     <a href="{% url 'tripapp:edit_profile' username=user.username %}" class="btn btn-primary">Edit Profile</a>
+                    <a href="{% url 'tripapp:my_trip_plans' username=user.username %}" class="btn btn-secondary">My Trip Plan</a>
+                    <a href="{% url 'tripapp:my_likes' username=user.username %}" class="btn btn-info">My Likes</a>
                 {% endif %}
             </div>
         </div>

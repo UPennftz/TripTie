@@ -23,8 +23,10 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
     path('edit_profile/<username>/', views.EditProfileView.as_view(), name='edit_profile'),
-    path('myposts/', views.myposts, name='myposts'),
+    path('my_trip_plans/<username>/', views.MyTripPlansView.as_view(), name='my_trip_plans'),
+    path('my_likes/<username>/', views.MyLikesView.as_view(), name='my_likes'),
+    path('add_plan/<username>', views.AddPlan.as_view(), name='add_plan'),
+    path('success/',views.SuccessView.as_view(), name='success'),
     path('messages/', views.messages, name='messages'),
     path('explore/', views.explore, name='explore'),
 ]
-

@@ -13,7 +13,7 @@ class TripPlanForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea, max_length=TripPlan.DESCRIPTION_MAX_VALUE,
                                   help_text="Please enter the description")
     is_private = forms.BooleanField(initial=False)
-    image = forms.ImageField(required=False)
+    image = forms.ImageField(required=True)
 
     class Meta:
         model = TripPlan

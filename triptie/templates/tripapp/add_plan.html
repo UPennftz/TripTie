@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'tripapp/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title_Block %}
+    Add a Plan
+{% endblock %}
+
+{% block body_block %}
+    <div class="centered-form">
+        <div class="form-container">
+            <div class="card">
+                <h5 class="card-header text-center">Add a New Trip Plan</h5>
+                <div class="card-body">
+                    <form action="{% url 'tripapp:add_plan' username %}" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="title"
+                                   placeholder="Title of your trip plan" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"
+                                      required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="destination_city" class="form-label">Destination City</label>
+                            <input type="text" class="form-control" id="destination_city" name="destination_city"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="end_date" class="form-label">End Date</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="is_private" name="is_private">
+                            <label class="form-check-label" for="is_private">Make this trip private</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Trip Image</label>
+                            <input class="form-control" type="file" id="image" name="image" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> Please correct the following errors:
+                            <ul>
+                                {% for field, errors in form.errors.items %}
+                                    {% for error in errors %}
+                                        <li>{{ field|title }}: {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
