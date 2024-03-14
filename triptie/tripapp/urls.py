@@ -27,6 +27,8 @@ urlpatterns = [
     path('my_likes/<username>/', views.MyLikesView.as_view(), name='my_likes'),
     path('add_plan/<username>', views.AddPlan.as_view(), name='add_plan'),
     path('success/',views.SuccessView.as_view(), name='success'),
-    path('messages/', views.messages, name='messages'),
+    path('trip_plan_search/', views.TripPlanSearch.as_view(), name='trip_plan_search'),
+    path('add_commnent/', views.AddComment.as_view(), name='add_comment'),
+    path('add_like/', views.AddLike.as_view(), name='add_like'),
     path('explore/', views.explore, name='explore'),
 ]

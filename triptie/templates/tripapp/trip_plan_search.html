@@ -6,5 +6,54 @@
 {% endblock %}
 
 {% block body_block %}
-    
+    <form method="GET" action="{% url 'tripapp:trip_plan_search' %}">
+        {{ form.query }}
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+
+    <div class="container mt-4">
+    {% if trip_plans %}
+        <h2>Search Results for "{{ query }}"</h2>
+        <hr>
+        {% if liked_trip_plans %}
+            <div class="d-flex flex-column align-items-center">
+                {% for trip_plan in trip_plans %}
+                    <div class="card mb-4" style="width: 100%; max-width: 600px;">
+                        {% if liked_trip_plan.image %}
+                            <img src="{{ MEDIA_URL }}{{ trip_plan.image.url }}" class="card-img-top"
+                                 alt="{{ trip_plan.title }}">
+                        {% else %}
+                            <img src="https://i.ibb.co/FKrsX1r/hot-air-balloon-4095513-1280.jpg" class="card-img-top"
+                                 alt="Default Image">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ liked_trip_plan.title }}</h5>
+                            <p class="card-text">{{ liked_trip_plan.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Trip to {{ liked_trip_plan.destination_city }}</small>
+                                <small class="text-muted">{{ liked_trip_plan.start_date }}
+                                    - {{ liked_trip_plan.end_date }}</small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                {% if liked_trip_plan.liked %}
+                                    <button class="btn btn-outline-primary btn-sm like-btn liked"
+                                            data-trip-plan-id="{{ liked_trip_plan.trip_plan.id }}">Like
+                                    </button>
+                                {% else %}
+                                    <button class="btn btn-outline-primary btn-sm like-btn"
+                                            data-trip-plan-id="{{ liked_trip_plan.trip_plan.id }}">Like
+                                    </button>
+                                {% endif %}
+                                <a href="#" class="btn btn-outline-secondary btn-sm">Comment</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No results found for "{{ query }}".</p>
+        {% endif %}
+    {% endif %}
 {% endblock %}

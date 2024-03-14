@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 
-from tripapp.form import UserProfileForm, TripPlanForm
+from tripapp.form import UserProfileForm, TripPlanForm, TripPlanSearchForm
 from tripapp.models import UserProfile, TripPlan, LikePost
 
 
@@ -133,7 +134,7 @@ class AddPlan(View):
             trip_plan = form.save(commit=False)
             trip_plan.user = request.user
             trip_plan.save()
-            return render(request,'tripapp/success.html')
+            return render(request, 'tripapp/success.html')
 
         context = {
             'form': form,
@@ -149,22 +150,58 @@ class AddPlan(View):
         return render(request, 'tripapp/add_plan.html', context)
 
 
+class TripPlanSearch(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        form = TripPlanSearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            # Exclude private trip plans
+            trip_plans = TripPlan.objects.filter(title__icontains=query, is_private=False)
+            liked_trip_plans = []
+            user = request.user
+            for trip_plan in trip_plans:
+                liked = LikePost.objects.filter(user=user, trip_plan=trip_plan).exists()
+                liked_trip_plans.append({'trip_plan': trip_plan, 'liked': liked})
+            return render(request, 'tripapp/trip_plan_search.html', {'trip_plans': liked_trip_plans, 'query': query})
+
+        return render(request, 'tripapp/trip_plan_search.html', {'form': form})
+
+
 class SuccessView(View):
     @method_decorator(login_required)
     def get(self, request):
         return render(request, 'tripapp/success.html')
 
 
+class AddComment(View):
+    @method_decorator(login_required)
+    def post(self, request, username):
+        return
+
+
+class AddLike(View):
+    @method_decorator(login_required)
+    def get(self, request, trip_plan_id):
+        trip_plan = TripPlan.objects.get(id=trip_plan_id)
+        user = request.user
+
+        # Check if the user has already liked the trip plan
+        if LikePost.objects.filter(user=user, trip_plan=trip_plan).exists():
+            # User has already liked the trip plan, return an error response
+            return JsonResponse({'error': 'User has already liked this trip plan'}, status=400)
+
+        # Like the trip plan
+        LikePost.objects.create(user=user, trip_plan=trip_plan)
+        return JsonResponse({'success': 'Trip plan liked successfully'})
+
+
+def user_has_liked_trip_plan(user, trip_plan_id):
+    return LikePost.objects.filter(user=user, trip_plan_id=trip_plan_id).exists()
+
+
 def weather(request):
     return render(request, 'tripapp/weather.html')
-
-
-def myposts(request):
-    return render(request, 'tripapp/myposts.html')
-
-
-def messages(request):
-    return render(request, 'tripapp/messages.html')
 
 
 def explore(request):

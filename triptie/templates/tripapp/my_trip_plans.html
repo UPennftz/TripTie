@@ -14,7 +14,7 @@
             {% for trip_plan in trip_plans %}
                 <div class="card mb-4" style="width: 100%; max-width: 600px;">
                     {% if trip_plan.image %}
-                        <img src="{{ trip_plan.image.url }}" class="card-img-top" alt="{{ trip_plan.title }}">
+                        <img src="{{ MEDIA_URL }}{{ trip_plan.image.url }}" class="card-img-top" alt="{{ trip_plan.title }}">
                     {% else %}
                         <img src="https://i.ibb.co/FKrsX1r/hot-air-balloon-4095513-1280.jpg" class="card-img-top" alt="Default Image">
                     {% endif %}
