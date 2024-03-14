@@ -30,13 +30,13 @@
 <div class="menu">
     <ul>
         <li><a href="{% url 'tripapp:index' %}">Home</a></li>
-{#        <li><a href="{% url 'tripapp:weather' %}">Weather</a></li>#}
+        {#        <li><a href="{% url 'tripapp:weather' %}">Weather</a></li>#}
         <li><a href="{% url 'tripapp:about' %}">About</a></li>
         {% if user.is_authenticated %}
             <li><a href="{% url 'tripapp:explore' %}">Explore</a></li>
-            <li><a href="{% url 'tripapp:profile' %}">Profile</a></li>
+            <li><a href="{% url 'tripapp:profile' user.username %}">Profile</a></li>
             <li><a href="{% url 'auth_logout' %}">Logout</a></li>
-{#            <li><a href="{% url 'add_plan' %}">Add a Plan</a></li>#}
+            {#            <li><a href="{% url 'add_plan' %}">Add a Plan</a></li>#}
         {% else %}
             <li><a href="{% url 'auth_login' %}">Login</a></li>
             <li><a href="{% url 'registration_register' %}">Register</a></li>

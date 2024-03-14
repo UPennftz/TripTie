@@ -29,7 +29,7 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
-    gender = forms.ChoiceField(choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], widget=forms)
+    gender = forms.ChoiceField(choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], widget=forms.Select)
     age = forms.IntegerField(min_value=0, max_value=200)
     bio = forms.CharField(widget=forms.Textarea)
     picture = forms.ImageField(required=False)
@@ -44,3 +44,4 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
+        fields = ('comment_content',)
