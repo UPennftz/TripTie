@@ -3,3 +3,5 @@ djangorestframework>=3.12
 gunicorn==21.2.0
 whitenoise==6.6.0
 Pillow>=9.0.0
+requests>=2.31.0
+google-api-python-client>=1.0
