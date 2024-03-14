@@ -1,3 +1,4 @@
+/* index.css */
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 * {
   margin: 10;
@@ -5,9 +6,116 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
+#youtube-videos {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start; /* align-items changed to flex-start */
+  flex-wrap: wrap; /* allows items to wrap to the next line */
+}
+
+.video-container {
+  flex-basis: 30%;
+  margin: 10px;
+  display: flex;
+  flex-direction: column; /* stacks children (iframe and info div) vertically */
+  align-items: center; /* centers the children horizontally */
+}
+
+.video-iframe {
+  margin-bottom: 5px; /* adds a little space below the video */
+}
+
+.video-info {
+  text-align: center; /* centers the text of title and description */
+}
+
+.video-title {
+  margin: 5px 0; /* adds some space above and below the title */
+}
+
+.video-description {
+  font-size: 0.9em; /* optionally reduce the font size of the description */
+}
+
+/* This styles each individual video container */
+.city-video {
+  flex-basis: 30%; /* This gives each video container a base width */
+  margin: 10px; /* This adds some space around each video container */
+}
+
+
+.video-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align the child elements */
+  width: calc(33.333% - 40px); /* Subtract the gap from the width */
+  box-sizing: border-box; /* Include padding and border in the element's width */
+}
+
+iframe {
+  width: 100%; /* Take the full width of the parent */
+  height: auto; /* Maintain the aspect ratio */
+}
+
+#city-name {
+  color: black;
+  width: 57%;
+  height: 40px;
+  line-height: normal;
+  padding: 5px 10px;
+  margin: 0 auto;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#search-form button {
+  height: 40px;
+  padding: 5px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer; /* Show pointer on mouseover */
+}
+
+
+/*Center the search box*/
+#search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+/* Center the main */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+
+/*Set the text color of the link to white*/
+header a {
+  color: #ffffff; /* color: white; */
+  text-decoration: none; /* no underline */
+}
+
+/*Make the navigation menu horizontal instead of vertical*/
+header ul {
+  list-style: none;
+  display: flex;
+}
+
+header ul li {
+  margin-right: 20px;
+}
+
 header
 {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -48,7 +156,7 @@ header .logo
 }
 .showcase
 {
-  position: absolute;
+  position: relative;
   right: 0;
   width: 100%;
   min-height: 100vh;
@@ -67,7 +175,7 @@ header .logo
 
 .showcase video
 {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -77,7 +185,7 @@ header .logo
 }
 .overlay
 {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -124,7 +232,7 @@ header .logo
   text-transform: uppercase;
   text-decoration: none;
   font-weight: 500;
-  margin-top: 10px;
+  margin-top: 140px;
   color: #111;
   letter-spacing: 2px;
   transition: 0.2s;
@@ -187,6 +295,19 @@ header .logo
 {
   color: #f46703;
 }
+<<<<<<< HEAD
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .video-wrapper {
+        max-width: calc(50% - 40px); /* Adjust max width for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .video-wrapper {
+        max-width: 100%; /* Each video takes full width on small screens */
+    }
+=======
 
 @media (max-width: 800px)
 {
@@ -203,4 +324,5 @@ header .logo
   {
     font-size: 1.5em;
   }
+>>>>>>> mainproject/master
 }
