@@ -8,17 +8,10 @@ from django.views import View
 from django.http import JsonResponse
 from .explorePage import search_youtube_for_city
 import requests
-<<<<<<< HEAD
 from tripapp.form import UserProfileForm, TripPlanForm, TripPlanSearchForm
 from tripapp.models import UserProfile, TripPlan, LikePost
-
-
-
-=======
 from tripapp.form import UserProfileForm, TripPlanForm
 from tripapp.models import UserProfile, TripPlan, LikePost
-
->>>>>>> 4775415428d0978de50f9932237d7f72b1bced69
 class IndexView(View):
     def get(self, request):
         return render(request, 'tripapp/index.html')

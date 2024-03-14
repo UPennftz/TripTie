@@ -1,12 +1,4 @@
-.content {
-    background-color: white; /* Set the content background to white */
-    color: black; /* Set the text color to black for visibility */
-    max-width: 1200px;
-    min-height: 1100px;
-    width: 70%;
-    margin: 70px auto; /* This will center the content div */
-    padding: 20px; /* Add some padding */
-}
+
 
 .like-btn {
     background-color: #337ab7;
