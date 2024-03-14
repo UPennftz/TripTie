@@ -5,7 +5,6 @@ from django.urls import path, include
 from tripapp import views  # Ensure you have home and explore_view defined here
 
 urlpatterns = [
-     path('about/', views.about, name='about'),
     path('admin/', admin.site.urls),
     path('', views.IndexView.as_view(), name='index'),  # Homepage handled by IndexView
     path('tripapp/', include('tripapp.urls')),

@@ -1,39 +1,24 @@
-<!--explore.html-->
+{% extends 'tripapp/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Page</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'tripapp:index' %}">Home</a></li>
-                <li><a href="{% url 'tripapp:explore' %}">Explore</a></li>
-                <li><a href="{% url 'tripapp:about' %}">About</a></li>
-                <li><a href="{% url 'tripapp:profile' %}">Profile</a></li>
-                <li><a href="{% url 'tripapp:login' %}">Login</a></li>
-            </ul>
-        </nav>
-        <h1>Explore Page</h1>
-    </header>
-    <main>
+{% block title_block %}
+Add a Plan
+{% endblock %}
+
+{% block body_block %}
+<main class="showcase">
+    <div class="overlay"></div>
+    <div class="content">
         <h2>Welcome to the Explore Page!</h2>
-        <form id="search-form">
-            <input type="text" id="city-name" placeholder="Enter a city name">
-            <button type="submit">Search</button>
+        <form id="search-form" class="text">
+            <input type="text" id="city-name" placeholder="Enter a city name" class="form-control">
+            <button type="submit" class="btn btn-primary mt-3">Search</button>
         </form>
-        <div id="youtube-videos">
+        <div id="youtube-videos" class="mt-5">
             <div id="london-video" class="city-video"></div>
             <div id="paris-video" class="city-video"></div>
             <div id="edinburgh-video" class="city-video"></div>
         </div>
-    </main>
-    <script src="{% static 'js/explore.js' %}"></script>
-</body>
-</html>
+    </div>
+</main>
+<script src="{% static 'js/explore.js' %}"></script>
+{% endblock %}
