@@ -1,0 +1,12 @@
+{% extends 'tripapp/base.html' %}
+{% load static %}
+
+{% block title_Block %}
+    Success
+{% endblock %}
+
+{% block body_block %}
+    <h1>Congratulations! You add a plan successfully!</h1>
+
+    <a href="{% url 'tripapp:my_trip_plans' user.username %}" class="btn btn-primary">View My Trip Plans</a>
+{% endblock %}

@@ -1,103 +1,33 @@
+{% extends 'tripapp/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        header {
-            background-color: #000;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
-        #logo {
-            font-weight: bold;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-        nav ul li {
-            margin-right: 20px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        button {
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            padding: 10px 20px;
-        }
-        button:hover {
-            text-decoration: underline;
-        }
-        h1 {
-            margin-left: 20px;
-            color: #fff;
-        }
-        /* Add further styling for your section */
-    </style>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <header>
-        <div style="display: flex; align-items: center;">
-            <div id="logo">LOGO</div>
-            <nav>
-                <ul>
-                    <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'explore' %}">Explore</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'weather' %}">Weather</a></li>
-                </ul>
-            </nav>
+{% block title_Block %}
+    Profile for {{ selected_user.username }}
+{% endblock %}
+
+{% block body_block %}
+    <div class="container">
+        <div class="row">
+            {% if user_profile.picture %}
+                <img src="{{ MEDIA_URL }}{{ user_profile.picture.url }}" width="300" height="300"
+                     alt="{{ selected_user.username }}'s profile image"/>
+            {% else %}
+                <img src="https://ibb.co/xm1C47n" width="300" height="300" alt="Placeholder image"/>
+            {% endif %}
+            <br/>
+            <div>
+                <p>
+                    <strong>Username:</strong> {{ user_profile.user.username }}<br>
+                    <strong>Gender:</strong> {{ user_profile.gender }}<br>
+                    <strong>Age:</strong> {{ user_profile.age }}<br>
+                    <strong>Bio:</strong> {{ user_profile.bio }}<br>
+                </p>
+                {% if selected_user == user %}
+                    <a href="{% url 'tripapp:edit_profile' username=user.username %}" class="btn btn-primary">Edit Profile</a>
+                    <a href="{% url 'tripapp:my_trip_plans' username=user.username %}" class="btn btn-secondary">My Trip Plan</a>
+                    <a href="{% url 'tripapp:my_likes' username=user.username %}" class="btn btn-info">My Likes</a>
+                {% endif %}
+            </div>
         </div>
-        <h1>Profile Page</h1>
-        <button onclick="logout()">Log Out</button>
-    </header>
-    <section>
-        <div id="avatar">avatar</div>
-        <div id="user-info">
-            <p>Name:</p>
-            <p>Age:</p>
-            <p>Gender:</p>
-            <p>Nationality:</p>
-            <button onclick="editProfile()">Edit</button>
-        </div>
-        <div id="user-actions">
-            <button onclick="viewCollection()">My Collection</button>
-            <button onclick="viewPosts()">My Post</button>
-        </div>
-    </section>
-    <script>
-        function logout() {
-            // Implement the logout functionality
-        }
-        function editProfile() {
-            // Implement the edit profile functionality
-        }
-        function viewCollection() {
-            // Implement the view collection functionality
-        }
-        function viewPosts() {
-            // Implement the view posts functionality
-        }
-    </script>
-    <script src="{% static 'js/profilePage.js' %}"></script>
-</body>
-</html>
+    </div>
+{% endblock %}
