@@ -1,4 +1,5 @@
 # 项目介绍
+## 中文简介
 融合Django架构与Railway云平台部署的可扩展旅行生态平台探索  
   
 2024年01月-2024年04月  
@@ -12,6 +13,7 @@
 2. 社交媒体集成：加入Facebook, Instagram和Twitter(X)的API，用户可一键分享旅行计划功能。超90%的用户认为功能方便实用。  
 3. CSS框架建设：配置并优化项目初始CSS，建立可扩展前端框架。通过优化，页面加载速度平均提升10%。  
   
+## Abstract
 Exploration of a Scalable Travel Ecosystem Platform Integrated with Django Architecture and Deployed on Railway Cloud Platform  
   
 Duration: January 2024 - April 2024  
